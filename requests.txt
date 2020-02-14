@@ -1,0 +1,20 @@
+POST /api/v6/auth/login: # logs in with an user name and a password
+  {"email": "user@example.com", "password": "plaintext-password"}
+> {"token": null || "the token! :D", "mfa": false || true, "sms": false || true, "ticket": null | "ticketid"}
+
+
+: TOTP AUTH
+POST /api/v6/auth/mfa/totp: # you entered the mfa (totp) code
+  {"code": "123456", "ticket": "ticketid"}
+> {"token": "the token! :D"}
+
+### OR ###
+
+: SMS AUTH
+POST /api/v6/auth/mfa/sms/send: # sends a sms 2-fac-auth code
+  {"ticket": "ticketid"}
+> {"phone": "+********xxxx"}
+
+POST /api/v6/auth/mfa/sms: # you entered the mfa code
+  {"code": "123456", "ticket": "ticketid"}
+> {"token": "the token! :D"}
