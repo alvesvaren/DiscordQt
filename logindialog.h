@@ -2,6 +2,7 @@
 #define LOGINDIALOG_H
 
 #include <QDialog>
+#include <QNetworkReply>
 
 namespace Ui {
 class LoginDialog;
@@ -24,6 +25,8 @@ private slots:
     void on_dialogButton_accepted();
 
     void on_loginButton_clicked();
+
+    void on_syncRequestFinished(QNetworkReply *reply);
 
 private:
     Ui::LoginDialog *ui;

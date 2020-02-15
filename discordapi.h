@@ -2,24 +2,23 @@
 #define DISCORDAPI_H
 #include <iostream>
 #include <vector>
+#include <QtNetwork/QNetworkAccessManager>
+#include <QtNetwork/QNetworkRequest>
+#include <QUrl>
+#include <QJsonDocument>
+#include <QJsonObject>
+
 using namespace std;
 namespace api {
 
-struct discord_login_response {
+/*struct discord_login_response {
     string token;
     bool mfa;
     bool sms;
     string ticket;
-};
-
-/*class discordapi
-{
-public:
-    discordapi();
-
 };*/
 
-discord_login_response login(string email, string password);
+void login(string email, string password);
 
 }
 

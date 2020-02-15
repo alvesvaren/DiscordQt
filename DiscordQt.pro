@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui network
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -20,13 +20,15 @@ SOURCES += \
     login.cpp \
     logindialog.cpp \
     main.cpp \
-    discordqt.cpp
+    discordqt.cpp \
+    networkapi.cpp
 
 HEADERS += \
     discordapi.h \
     discordqt.h \
     login.h \
-    logindialog.h
+    logindialog.h \
+    networkapi.h
 
 FORMS += \
     discordqt.ui \

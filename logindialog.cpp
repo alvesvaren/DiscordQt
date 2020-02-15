@@ -2,6 +2,8 @@
 #include "ui_logindialog.h"
 #include <QDesktopServices>
 #include <QUrl>
+#include <QtNetwork/QNetworkRequest>
+
 #include "discordapi.h"
 
 LoginDialog::LoginDialog(QWidget *parent) :
@@ -31,8 +33,30 @@ void LoginDialog::on_dialogButton_accepted()
     ui->tokenField->text();
 }
 
+void LoginDialog::on_syncRequestFinished(QNetworkReply *reply) {
+    qWarning() << reply->readAll();
+}
+
 void LoginDialog::on_loginButton_clicked()
 {
-    api::discord_login_response tmp = api::login(ui->emailField->text().toStdString(), ui->passwordField->text().toStdString());
-    ui->tokenField->setText(QString::fromUtf8(tmp.token.c_str()));
+
+    qWarning() << "reply->readAll";
+    // QJsonDocument tmp = api::login(ui->emailField->text().toStdString(), ui->passwordField->text().toStdString());
+    // ui->tokenField->setText(QString::fromUtf8(tmp.toJson()));
+    QUrl url("https://discordapp.com/api/v6/auth/login");
+    QNetworkRequest request(url);
+
+    request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
+
+    QNetworkAccessManager *manager = new QNetworkAccessManager(this);
+
+    connect(manager, SIGNAL(finished(QNetworkReply*)),
+            this, SLOT(on_syncRequestFinished(QNetworkReply*)));
+    QJsonObject json;
+    json["email"] = ui->emailField->text();
+    json["password"] = ui->passwordField->text();
+    QByteArray data = QJsonDocument(json).toJson();
+
+    // FIXME for debug
+    manager->post(request, data);
 }
