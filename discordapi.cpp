@@ -2,7 +2,7 @@
 
 namespace api{
 
-void login(string email, string password) {
+/*void login(string email, string password) {
     QUrl url("https://discordapp.com/api/v6/auth/login");
     /*QNetworkRequest request(url);
     request.setHeader(QNetworkRequest::ContentTypeHeader, "application/json");
@@ -13,8 +13,25 @@ void login(string email, string password) {
     manager->post(request, data);
     qDebug() << "Sync" << QString::fromUtf8(data.data(), data.size());
     /*tmp.token = email;
-    tmp.ticket = password;*/
+    tmp.ticket = password;
     return;
+}*/
+
+namespace auth {
+
+QJsonObject login(QString username, QString password) {
+
+}
+QJsonObject submitSmsMfa(QString code, QString ticket) {
+
+}
+QString sendSmsMfa(QString ticket) {
+
+}
+QJsonObject submitMfa(QString ticket) {
+
+}
+
 }
 
 }

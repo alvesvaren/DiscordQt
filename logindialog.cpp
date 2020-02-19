@@ -34,7 +34,16 @@ void LoginDialog::on_dialogButton_accepted()
 }
 
 void LoginDialog::on_syncRequestFinished(QNetworkReply *reply) {
-    qWarning() << reply->readAll();
+    QByteArray data = reply->readAll();
+    qWarning() << data;
+    QJsonObject test = QJsonDocument::fromJson(data).object();
+    if (!test["token"].isNull() && test["token"].isString()) {
+          ui->tokenField->setText(test["token"].toString());
+          ui->twoFactorAuthField->setEnabled(false);
+    } else {
+        ui->twoFactorAuthField->setEnabled(true);
+    }
+
 }
 
 void LoginDialog::on_loginButton_clicked()

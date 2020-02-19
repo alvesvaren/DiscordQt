@@ -18,6 +18,13 @@ namespace api {
     string ticket;
 };*/
 
+namespace auth {
+QJsonObject login(QString username, QString password);
+QJsonObject submitSmsMfa(QString code, QString ticket);
+QString sendSmsMfa(QString ticket);
+QJsonObject submitMfa(QString ticket);
+}
+
 void login(string email, string password);
 
 }
