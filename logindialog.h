@@ -10,6 +10,8 @@ class LoginDialog;
 
 class LoginDialog : public QDialog
 {
+    QString ticketId;
+    bool sms;
     Q_OBJECT
 
 public:
